@@ -66,10 +66,12 @@ MIRTE documents this as an optional speed-up if you do not need those packages a
 Install dependencies and build:
 ```bash
 cd /workspaces/mirte_ws
+sudo apt update
+git submodule init && git submodule update && git submodule update --init --recursive
 source /opt/ros/humble/setup.bash
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
-source install/setup.bash
+source install/setup.bash 
 ```
 Those are the same build steps from the MIRTE docs.
 
