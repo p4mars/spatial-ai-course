@@ -1,7 +1,15 @@
 # Spatial AI
 ## Docker installation
 
+### Windows Installation
 
+Follow the instructions on the [docker website](https://docs.docker.com/desktop/setup/install/windows-install/) to install Docker Desktop. Please note that the Docker Installer must be ran as admistrator.
+
+If you get the error The docker client must be run elevated to connect. Delete the C:/ProgramData/DockerDesktop and run the installer again as administrator. 
+
+Once installed follow the tutorial on how to run your first image. Once you finish the tutorial, follow the same steps to build the Dockerfile available on Brightspace.
+
+Once that has finished building follow the instructions below to install and build the relevant Mirte Packages inside of the docker.
 
 **Create a project folder on host:**
 ```bash
