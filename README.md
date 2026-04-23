@@ -9,6 +9,8 @@ If you get the error The docker client must be run elevated to connect. Delete t
 
 Once installed follow the tutorial on how to run your first image. Once you finish the tutorial, follow the same steps to build the Dockerfile available on Brightspace.
 
+![Run the "How do I run a container"](./images/DockerDesktop.jpg)
+
 Once that has finished building follow the instructions below to install and build the relevant Mirte Packages inside of the docker.
 
 **Create a project folder on host:**
