@@ -46,10 +46,10 @@ docker compose up -d
 docker exec -it mirte-dev bash
 ```
 
-## Install the MIRTE ROS packages inside the container**
+## Install the MIRTE ROS packages inside the container
 Inside the container:
 ```bash
-cd /workspace/mirte_ws/src
+cd /workspaces/mirte_ws/src
 git clone https://github.com/mirte-robot/mirte-gazebo  
 vcs import . < mirte-gazebo/sources.repos
 ```
@@ -63,11 +63,17 @@ cd /workspaces/mirte_ws
 ```
 MIRTE documents this as an optional speed-up if you do not need those packages and have no changes there. -->
 
+<!-- Navigate to the `src` directory:
+```bash
+cd /workspaces/mirte_ws/src
+``` -->
+You should now see three folders under `src`, namely `gazebo_grasp_fix`, `mirte-gazebo`, and `mirte-ros-packages`. `cd` to each folder and run the following command to get the submodules:
+```bash
+git submodule init && git submodule update && git submodule update --init --recursive
+```
 Install dependencies and build:
 ```bash
-cd /workspaces/mirte_ws
 sudo apt update
-git submodule init && git submodule update && git submodule update --init --recursive
 source /opt/ros/humble/setup.bash
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install

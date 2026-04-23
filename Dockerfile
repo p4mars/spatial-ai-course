@@ -33,6 +33,8 @@ RUN apt-get update && apt-get install -y \
     ros-humble-joint-state-publisher-gui \
     ros-humble-robot-state-publisher \
     ros-humble-teleop-twist-keyboard \
+    ros-humble-ros2-control \
+    ros-humble-ros2-controllers \
     && rm -rf /var/lib/apt/lists/*
 
 # rosdep init is safe to attempt once
