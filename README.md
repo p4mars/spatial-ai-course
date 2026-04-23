@@ -1,1 +1,55 @@
-# probable-octo-doodle
+# Spatial AI
+## Docker installation
+
+
+
+**Create a project folder on host:**
+```bash
+mkdir -p ~/mirte_dev/ws/src
+cd ~/mirte_dev
+```
+
+**Copy the `Dockerfile` and the `docker-compose.yml` in the folder.**
+>[!info]
+>`notwork_mode: host` is important for ROS 2 discovery and for talking to the physical robot more easily.
+>For simulation GUI, the X11 socket mount is the usual Linux approach.
+
+**Build and enter the container**
+```bash
+cd ~/mirte_dev
+docker compose build
+docker compose run -rm mirte-dev
+```
+After the first creation, you can enter the container with:
+```bash
+docker compose up -d
+docker exec -it mirte-dev bash
+```
+
+**Install the MIRTE simulation workspace inside the container**
+Inside the container:
+```bash
+cd /workspace/mirte_ws/src
+git clone https://github.com/mirte-robot/mirte-gazebo  
+vcs import . < mirte-gazebo/sources.repos
+```
+That mirrors the MIRTE simulation instructions, which say to clone `mirte-gazebo` and then import the repositories listed in `sources.repos`.
+
+*Optional cleanup for simulation mode*, exactly as in the MIRTE docs:
+```bash
+cd /workspaces/mirte_ws/src/mirte_ros_packages  
+rm -rf mirte_bringup/ mirte_telemetrix_cpp/ mirte_teleop/ mirte_test/ mirte_zenoh_setup/
+cd /workspaces/mirte_ws
+```
+MIRTE documents this as an optional speed-up if you do not need those packages and have no changes there.
+
+Install dependencies and build:
+```bash
+cd /workspaces/mirte_ws
+source /opt/ros/humble/setup.bash
+rosdep install --from-paths src --ignore-src -r -y
+colcon build --symlink-install
+source install/setup.bash
+```
+Those are the same build steps from the MIRTE docs.
+
