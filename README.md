@@ -4,19 +4,25 @@
 
 
 **Create a project folder on host:**
-```bash
+- For Linux/Mac users
+<!-- ```bash
 mkdir -p ~/mirte_dev/ws/src
 cd ~/mirte_dev
-```
-
-**Copy the `Dockerfile` and the `docker-compose.yml` in the folder.**
->[!info]
->`notwork_mode: host` is important for ROS 2 discovery and for talking to the physical robot more easily.
->For simulation GUI, the X11 socket mount is the usual Linux approach.
-
-**Build and enter the container**
+``` -->
 ```bash
-cd ~/mirte_dev
+mkdir -p ~/mirte_dev
+```
+- For Windows users
+Create a folder named `mirte_dev` in any folder you choose. 
+
+
+**Copy the `Dockerfile` and the `docker-compose.yml` in the `mirte_dev` folder.**
+<!-- >[!info]
+>`notwork_mode: host` is important for ROS 2 discovery and for talking to the physical robot more easily.
+>For simulation GUI, the X11 socket mount is the usual Linux approach. -->
+
+**Build and ENTER the container**
+```bash
 docker compose build
 docker compose run -rm mirte-dev
 ```
