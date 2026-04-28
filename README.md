@@ -135,3 +135,53 @@ Then you can follow the instructions in [MIRTE Master docs](https://docs.mirte.o
 
 ### Connecting MIRTE Master
 TBA
+
+## Connecting to the robot
+
+Once the Mirte has booted up it will create a hotspot with its name. Connect to the network. The default password is mirte_mirte. After you have connected to the network ssh into the robot using the ip address visible on the side screen. For example
+
+```
+ssh mirte@192.168.42.1
+```
+
+Upon first login you will be asked to create a new password for the robot. 
+
+As long as your computer is connected to the same network as the mirte (for example the hotspot creeated by the mirte) and you have ROS2 installed and source you should be able to view, send and receive topics. You can test this by running the following on your computer.
+
+```
+source /opt/ros/humble/setup.bash
+ros2 topic list
+```
+
+If you do not see any topics run the following on the Mirte
+
+```
+sudo systemctl restart mirte-ros
+```
+
+and check again on your computer.
+
+## Connecting to the robot
+
+Once the Mirte has booted up it will create a hotspot with its name. Connect to the network. The default password is mirte_mirte. After you have connected to the network ssh into the robot using the ip address visible on the side screen. For example
+
+```
+ssh mirte@192.168.42.1
+```
+
+Upon first login you will be asked to create a new password for the robot. 
+
+As long as your computer is connected to the same network as the mirte (for example the hotspot creeated by the mirte) and you have ROS2 installed and source you should be able to view, send and receive topics. You can test this by running the following on your computer.
+
+```
+source /opt/ros/humble/setup.bash
+ros2 topic list
+```
+
+If you do not see any topics run the following on the Mirte
+
+```
+sudo systemctl restart mirte-ros
+```
+
+and check again on your computer.
