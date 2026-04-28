@@ -42,6 +42,7 @@ cd ~/mirte_dev
 Create a folder named `spatial-ai` in any location of you chose and create a folder call `ws` within `spatial-ai`.
 
 **Prepare the `Dockerfile` and the `docker-compose.yml`**
+
 A text-based file named `Dockerfile` provides instructions to the image builder to create a container image. The file named `docker-compose.yml` defines your running containers, which is very practical if you have to re-run your container during development.
 Please download these two files from Brightspace and place them in the `spatial-ai` folder.
 <!-- >[!info]
@@ -59,6 +60,18 @@ After the first creation, you can enter the container (from different terminal/c
 docker compose up -d
 docker exec -it mirte-dev bash
 ```
+
+### Test environment
+Run Gazebo and Rviz to test the configured environment
+```bash
+gazebo --version # It should be Gazebo 11.x > 11.10
+gazebo # ctrl + c to cancel the process
+
+source /opt/ros/humble/setup.bash
+rviz2 # ctrl + c to cancel the process
+```
+If no GUI shows up or other the program freezes, your environment is not configured correctly. Please follow the steps above to setup the environment.
+
 
 ### Install the MIRTE ROS packages inside the container
 Inside the container:
