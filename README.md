@@ -98,9 +98,9 @@ Those are the same build steps from the MIRTE docs.
 ## Virtual Machine for MacOS
 The chips used in lastest Apple computers are `arm64`, while the binary Gazebo installation above is compiled for `amd64` (architecture of intel chips). The above Docker setup does not work for Mac -- Gazebo and Rviz fail to start. Thus, we provide Mac users with a fully configured Virtual Machine.
 
-For this purpose, you first need to install UTM on your Mac. Then download and unzip this file, for which you need **at least 35 GB free space** in your Mac.
+For this purpose, you first need to install UTM on your Mac. Then download and unzip this [file](https://surfdrive.surf.nl/f/18434905469), for which you need **at least 35 GB free space** in your Mac.
 
-Then, import the .utm file by either double-clicking it or dragging it into UTM.
+Then, import the `.utm` file by either double-clicking it or dragging it into UTM.
 
 The login password is the same as the username. Once you login, open a teminal and run
 ```bash
