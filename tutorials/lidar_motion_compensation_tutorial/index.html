@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LiDAR Motion Compensation Demo</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="workspace">
+        <canvas id="scene" width="1100" height="620" aria-label="LiDAR scan animation"></canvas>
+        <div class="frames">
+          <article class="frame-card">
+            <header>
+              <h2>Raw LiDAR Frame</h2>
+              <span id="rawStatus">waiting for scan</span>
+            </header>
+            <canvas id="rawFrame" width="520" height="360" aria-label="Raw LiDAR frame in start pose coordinates"></canvas>
+          </article>
+          <article class="frame-card">
+            <header>
+              <h2>Motion Compensated Frame</h2>
+              <span id="compStatus">not generated</span>
+            </header>
+            <canvas id="compFrame" width="520" height="360" aria-label="Motion compensated LiDAR frame in start pose coordinates"></canvas>
+          </article>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <div class="group">
+          <h1>One Scan Pipeline</h1>
+          <div class="metrics">
+            <div>
+              <span>Scan</span>
+              <strong id="scanProgress">0 / 360</strong>
+            </div>
+            <div>
+              <span>Time</span>
+              <strong id="scanTime">0.00 s</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="group">
+          <label>
+            Linear velocity
+            <output id="linearValue">1.20 m/s</output>
+          </label>
+          <input id="linearVelocity" type="range" min="-2.5" max="2.5" value="1.2" step="0.05" />
+
+          <label>
+            Angular velocity
+            <output id="angularValue">45 deg/s</output>
+          </label>
+          <input id="angularVelocity" type="range" min="-120" max="120" value="45" step="1" />
+
+          <label>
+            Scan duration
+            <output id="durationValue">1.00 s</output>
+          </label>
+          <input id="scanDuration" type="range" min="0.2" max="2.0" value="1.0" step="0.05" />
+
+          <label>
+            LiDAR rays
+            <output id="rayValue">360</output>
+          </label>
+          <input id="rayCount" type="range" min="90" max="720" value="360" step="30" />
+
+          <label>
+            IMU/Odom error
+            <output id="errorValue">0%</output>
+          </label>
+          <input id="poseError" type="range" min="0" max="50" value="0" step="1" />
+        </div>
+
+        <div class="group toggles">
+          <label><input id="showRays" type="checkbox" checked /> Animated rays</label>
+          <label><input id="showGhosts" type="checkbox" checked /> Robot poses during scan</label>
+        </div>
+
+        <div class="buttons">
+          <button id="playPause" type="button">Start scan</button>
+          <button id="reset" type="button">Reset</button>
+          <button id="step" type="button">Step</button>
+        </div>
+
+        <button id="compensate" class="wide" type="button" disabled>Motion compensate</button>
+
+        <div class="legend">
+          <div><i class="map"></i><span>Map / true surfaces</span></div>
+          <div><i class="raw"></i><span>Raw frame: ranges placed at start pose</span></div>
+          <div><i class="deskew"></i><span>Compensated frame: points transformed to start pose</span></div>
+          <div><i class="path"></i><span>Robot path</span></div>
+        </div>
+      </aside>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
