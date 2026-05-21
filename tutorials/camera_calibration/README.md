@@ -17,10 +17,9 @@ In this tutorial, you will:
 
 Once your camera is calibrated, you can further explore two interactive notebooks included in this tutorial:
 
-Calibrated Line Detection
-Detect straight lines more reliably using an undistorted camera image.
-ArUco Marker Pose Estimation
-Detect an ArUco marker and estimate its 3D pose relative to the camera.
+[Calibrated Line Detection](line_detection.ipynb): Detect straight lines more reliably using an undistorted camera image.
+
+[ArUco Marker Pose Estimation](aruco_marker_pose_estimation.ipynb): Detect an ArUco marker and estimate its 3D pose relative to the camera.
 
 These examples demonstrate how camera calibration improves geometric perception and supports robotics tasks such as localization, navigation, and spatial understanding.
 </details>
