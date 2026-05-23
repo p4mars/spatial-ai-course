@@ -52,41 +52,68 @@ index.html
 
 ## 3. How Motion Compensation Works
 
-The basic idea is simple.
+The basic idea is simple: during one scan, the LiDAR is moving, so different points are measured from different LiDAR poses.
 
-For each LiDAR point, we need to know the robot pose at the exact time that point was measured.
-
-Usually this pose information comes from:
+For each LiDAR point, we need two poses from odom/IMU:
 
 ```text
-IMU
-wheel odometry
-visual odometry
-LiDAR odometry
-GNSS/INS
+T_start = LiDAR pose when the scan starts
+T_i     = LiDAR pose when point i is measured
 ```
 
-Suppose the scan starts at pose `T0`.
+The LiDAR receives point `i` in the local LiDAR coordinate frame at that moment:
 
-One LiDAR point is measured later, when the robot is at pose `Ti`.
+$$
+\mathbf{p}_i^{L_i}
+=
+\begin{bmatrix}
+x_i \\
+y_i \\
+1
+\end{bmatrix}
+$$
 
-Without motion compensation, we incorrectly place that point as if it was measured at `T0`.
+But we want to express this point in the LiDAR coordinate frame at the start of the scan, `L_start`.
 
-With motion compensation, we use the relative transform between `Ti` and `T0` to transform the point back into the start-of-scan coordinate frame.
+So we compute the relative transformation from the point's measurement pose back to the scan-start pose:
 
-Conceptually:
+$$
+T_{start \leftarrow i}
+=
+T_{start}^{-1} T_i
+$$
+
+Then motion compensation is just one matrix multiplication:
+
+$$
+\boxed{
+\mathbf{p}_i^{L_{start}}
+=
+T_{start \leftarrow i}\,\mathbf{p}_i^{L_i}
+}
+$$
+
+Or written in one line:
+
+$$
+\boxed{
+\mathbf{p}_i^{L_{start}}
+=
+T_{start}^{-1} T_i\,\mathbf{p}_i^{L_i}
+}
+$$
+
+That is the whole idea:
 
 ```text
-point measured at time i
+point measured in LiDAR frame at time i
         +
-robot pose at time i
-        +
-start pose of scan
+relative transform from time i back to scan start
         ↓
-transform point back to start pose
-        ↓
-motion compensated point
+same point expressed in scan-start LiDAR frame
 ```
+
+Without motion compensation, we skip this transform and pretend every point was measured at the start pose. That is why the raw frame becomes distorted when the robot moves during the scan.
 
 In this demo:
 
@@ -131,4 +158,3 @@ VICET uses a reference point cloud or HD map and tries to match the current dist
 - the motion distortion correction inside the scan
 
 So this demo explains the basic intuition first: a LiDAR frame is built ray by ray while the robot moves. VICET and similar methods go further by using map matching to estimate or improve the motion correction.
-
