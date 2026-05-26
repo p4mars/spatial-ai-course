@@ -63,7 +63,7 @@ T_i     = LiDAR pose when point i is measured
 
 The LiDAR receives point `i` in the local LiDAR coordinate frame at that moment:
 
-$$
+```math
 \mathbf{p}_i^{L_i}
 =
 \begin{bmatrix}
@@ -71,37 +71,37 @@ x_i \\
 y_i \\
 1
 \end{bmatrix}
-$$
+```
 
 But we want to express this point in the LiDAR coordinate frame at the start of the scan, `L_start`.
 
 So we compute the relative transformation from the point's measurement pose back to the scan-start pose:
 
-$$
+```math
 T_{start \leftarrow i}
 =
 T_{start}^{-1} T_i
-$$
+```
 
 Then motion compensation is just one matrix multiplication:
 
-$$
+```math
 \boxed{
 \mathbf{p}_i^{L_{start}}
 =
 T_{start \leftarrow i}\,\mathbf{p}_i^{L_i}
 }
-$$
+```
 
 Or written in one line:
 
-$$
+```math
 \boxed{
 \mathbf{p}_i^{L_{start}}
 =
 T_{start}^{-1} T_i\,\mathbf{p}_i^{L_i}
 }
-$$
+```
 
 That is the whole idea:
 
