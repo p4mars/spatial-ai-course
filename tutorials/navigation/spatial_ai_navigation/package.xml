@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>spatial_ai_navigation</name>
+  <version>0.0.1</version>
+  <description>Navigation and mapping launch files for the Spatial AI MIRTE simulation.</description>
+  <maintainer email="user@example.com">spatial-ai</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>cartographer_ros</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>nav2_map_server</exec_depend>
+  <exec_depend>spatial_ai_simulation</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
