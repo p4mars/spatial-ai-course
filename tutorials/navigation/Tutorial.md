@@ -23,11 +23,6 @@ You need:
 - Linux, or a Linux virtual machine on macOS or Windows.
 - ROS 2 and the mirte-gazebo and nav2 dependencies installed.
 - Gazebo and RViz2 working with a graphical display.
-- A saved map from the previous mapping tutorial, for example:
-
-```bash
-~/YOUR_WS/src/spatial_ai_navigation/map/spatial_ai_map.yaml
-```
 
 The Spatial AI course repository is available at:
 
@@ -60,7 +55,7 @@ sudo apt install -y \
 ```
 
 On a Mac using a Linux virtual machine, the machine may use an arm64 chip. Some
-ROS packages may not be available from apt for arm64. If the apt install command
+ROS packages may not be available from apt for arm64. If the apt install command above 
 does not work, clone the Nav2 source code into your workspace and compile it
 from source.
 
@@ -85,6 +80,10 @@ colcon build --packages-select spatial_ai_simulation spatial_ai_navigation
 source install/setup.bash
 ```
 
+If there's build error.
+1. error `duplicate package spatial_ai_simulation`. Then delete one of the spatial_ai_simulation
+2. error `build fail`. Then remove the build and install folder. And then `colcon build` again.
+
 You must source the workspace in every new terminal that will run ROS commands:
 
 ```bash
@@ -96,7 +95,8 @@ source ~/YOUR_WS/install/setup.bash
 Start Gazebo, Nav2, and RViz by using commands below:
 
 ```bash
-ros2 launch spatial_ai_navigation spatial_ai_navigation.launch.py map:=src/spatial_ai_navigation/map/spatial_ai_map.yaml
+ros2 launch spatial_ai_navigation spatial_ai_navigation.launch.py map:=src/navigation/spatial_ai_navigation/map/spatial_ai_map.yaml
+ # replace the path with the map you saved. Or you can use the map in spatial_ai_navigation/map/spatial_ai_map.yaml
 ```
 
 After launch, you should see:
@@ -108,7 +108,7 @@ After launch, you should see:
 - Global and local costmap displays.
 
 If the map path is different, replace
-`src/spatial_ai_navigation/map/spatial_ai_map.yaml` with the full path to your
+`src/navigation/spatial_ai_navigation/map/spatial_ai_map.yaml` with the full path to your
 own map YAML file.
 
 ## 4. Localize The Robot
@@ -177,7 +177,8 @@ ros2 action list
 ros2 action info /navigate_to_pose
 ```
 
-If you want to navigate the robot in your code. You could use code like:
+If you want to navigate the robot in your code using `/navigate_to_pose` action. You could use code like:
+
 ```python
   import rclpy
   from rclpy.node import Node
@@ -268,7 +269,7 @@ The local costmap is centered around the robot and moves with it.
 The main Nav2 parameter file is:
 
 ```bash
-~/YOUR_WS/src/spatial_ai_navigation/config/nav2_params.yaml
+~/YOUR_WS/src/navigation/spatial_ai_navigation/config/nav2_params.yaml
 ```
 
 Parameters worth understanding:
@@ -328,7 +329,7 @@ Try changing the local and global costmap inflation radius.
 Open:
 
 ```bash
-~/YOUR_WS/src/spatial_ai_navigation/config/nav2_params.yaml
+~/YOUR_WS/src/navigation/spatial_ai_navigation/config/nav2_params.yaml
 ```
 
 Find both `inflation_radius` entries and change:
@@ -388,8 +389,8 @@ cd ~/YOUR_WS
 colcon build --packages-select spatial_ai_navigation
 source install/setup.bash
 ros2 launch spatial_ai_navigation spatial_ai_navigation.launch.py \
-  map:=src/spatial_ai_navigation/map/spatial_ai_map.yaml \
-  params_file:=src/spatial_ai_navigation/config/nav2_fast_speed_params.yaml
+  map:=src/navigation/spatial_ai_navigation/map/spatial_ai_map.yaml \
+  params_file:=src/navigation/spatial_ai_navigation/config/nav2_fast_speed_params.yaml
 ```
 
 Observe:
@@ -402,7 +403,7 @@ Observe:
 This package also includes a failed parameter case:
 
 ```bash
-~/YOUR_WS/src/spatial_ai_navigation/config/nav2_failed_preferforward_params.yaml
+~/YOUR_WS/src/navigation/spatial_ai_navigation/config/nav2_failed_preferforward_params.yaml
 ```
 
 This file sets `PreferForward.scale` very large, so the robot will not be able to go backward:
@@ -418,8 +419,8 @@ cd ~/YOUR_WS
 colcon build --packages-select spatial_ai_navigation
 source install/setup.bash
 ros2 launch spatial_ai_navigation spatial_ai_navigation.launch.py \
-  map:=src/spatial_ai_navigation/map/spatial_ai_map.yaml \
-  params_file:=src/spatial_ai_navigation/config/nav2_failed_preferforward_params.yaml
+  map:=src/navigation/spatial_ai_navigation/map/spatial_ai_map.yaml \
+  params_file:=src/navigation/spatial_ai_navigation/config/nav2_failed_preferforward_params.yaml
 ```
 
 This is a failed parameter case. The robot may try too hard to avoid backward
