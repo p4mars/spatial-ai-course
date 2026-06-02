@@ -40,8 +40,9 @@ The simulated environments used in this tutorial are provided in a separate repo
 
 ```bash
 cd ~/mirte_ws/src
-git clone <repository-url>
 ```
+And put inside the package 'spatial_ai_simulation'
+The rest of the files should be placed in the workspace i.e. where /src is.
 
 Next, return to the workspace root, build the packages, and source the workspace:
 
